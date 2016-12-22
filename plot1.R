@@ -1,8 +1,8 @@
-setwd("/Users/Dtrujillo/RCourse")
-Data <- read.table("household_power_consumption.txt",header = TRUE, sep = ";",, na.strings = "?", colClasses = c('character','character','numeric','numeric','numeric','numeric','numeric','numeric','numeric'))
-Data$Date <- as.Date(Data$Date, "%d/%m/%Y")
-dateTime <- paste(Data$Date, Data$Time)
-png(filename='plot1.png', width=480, height=480, units='px')
-hist(Data$Global_active_power, main="Global Active Power", xlab = "Global Active Power (kilowatts)", col="red")
+dataFile <- "./data/week1_expdata/household_power_consumption.txt"
+data <- read.table(dataFile, header=TRUE, sep=";", stringsAsFactors=FALSE, dec=".")
+subSetData <- data[data$Date %in% c("1/2/2007","2/2/2007") ,]
 
+globalActivePower <- as.numeric(subSetData$Global_active_power)
+png("plot1.png", width=480, height=480)
+hist(globalActivePower, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
 dev.off()
